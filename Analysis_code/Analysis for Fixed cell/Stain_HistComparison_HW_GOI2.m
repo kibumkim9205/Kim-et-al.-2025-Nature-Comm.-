@@ -1,4 +1,4 @@
-function [Data]=Stain_HistComparison_HW_GOI(conditions,datadir,resultdir,protein,protein2,DisplayOption,cellS,option,option2,option3)
+function [Data CDK2_Rbneg CDK2_Rbpos CDK4_Rbneg CDK4_Rbpos]=Stain_HistComparison_HW_GOI(conditions,datadir,resultdir,protein,protein2,DisplayOption,cellS,option,option2)
 EdUMeasured=1;
 showylabel=0;
 %condnum=size(conditions,1);
@@ -6,8 +6,8 @@ allnames=conditions(:,1);
 [~,uidx]=unique(allnames,'first');
 uniquenames=allnames(sort(uidx));
 uniquecondnum=numel(uniquenames);
-bmin=4; %cycD=4, p21=6, pRb=8
-bmax=30; %cycD=13, p21=13, pRb=13
+bmin=4; %cycD=4, p21=6, pRb=5
+bmax=15; %cycD=13, p21=13, pRb=13
 bstep=(bmax-bmin)/40; %pRb/tRb:100
 bin=bmin:bstep:bmax;
 [~,idx1]=min(abs(bin-1));
@@ -31,49 +31,62 @@ else
 end
 
 %%% Varying cell cycle gating %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    if option==1
-        G1minH=[3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000];
-        G1maxH=[6600000,6600000,6600000,6600000,6600000,7100000,7000000,7000000,7000000,7000000];
-        G1minE=[0,0,0,0,0,0,0,0,0,0]; G1maxE=[10,10,10,10,10,10,10,10,10,10];
-        SminH=[3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000];
-        SmaxH=[13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000];
-        SminE=[10,10,10,10,10,10,10,10,10,10];
-        SmaxE=[15,15,15,15,15,15,15,15,15,15];
-        G2minH=[6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000];
-        G2maxH=[13500000,13500000,13500000,13500000,13500000,13000000,13000000,13000000,13000000,13000000];
-        G2minE=[0,0,0,0,0,0,0,0,0,0]; G2maxE=[10,10,10,10,10,10,10,10,10,10];
-        xylim=[3000000 13500000 0 15];
-    elseif option==2
-        G1minH=[3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000];
-        G1maxH=[6600000,6600000,6600000,6600000,6600000,7100000,7000000,7000000,7000000,7000000];
-        G1minE=[0,0,0,0,0,0,0,0,0,0]; G1maxE=[10,10,10,10,10,10,10,10,10,10];
-        SminH=[3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000];
-        SmaxH=[13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000];
-        SminE=[10,10,10,10,10,10,10,10,10,10];
-        SmaxE=[15,15,15,15,15,15,15,15,15,15];
-        G2minH=[6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000];
-        G2maxH=[13500000,13500000,13500000,13500000,13500000,13000000,13000000,13000000,13000000,13000000];
-        G2minE=[0,0,0,0,0,0,0,0,0,0]; G2maxE=[10,10,10,10,10,10,10,10,10,10];
-        xylim=[3000000 13500000 0 15];
-    elseif option==3
-        G1minH=[3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000];
-        G1maxH=[6600000,6600000,6600000,6600000,6600000,7100000,7000000,7000000,7000000,7000000];
-        G1minE=[0,0,0,0,0,0,0,0,0,0]; G1maxE=[10,10,10,10,10,10,10,10,10,10];
-        SminH=[3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000];
-        SmaxH=[13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000,13500000];
-        SminE=[10,10,10,10,10,10,10,10,10,10];
-        SmaxE=[15,15,15,15,15,15,15,15,15,15];
-        G2minH=[6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000,6600000];
-        G2maxH=[13500000,13500000,13500000,13500000,13500000,13000000,13000000,13000000,13000000,13000000];
-        G2minE=[0,0,0,0,0,0,0,0,0,0]; G2maxE=[10,10,10,10,10,10,10,10,10,10];
-        xylim=[3000000 13500000 0 15];
+
+if option==1
+            G1minH=[000000,000000,000000,000000,000000,000000,000000,000000,000000];
+            G1maxH=[6800000,6800000,6800000,6800000,6800000,6800000,6800000,6800000];
+            G1minE=[1,1,1,1,1,1,1,1]; G1maxE=[8,8,8,8,8,8,8,8,8];
+            SminH=[000000,000000,000000,000000,000000,000000,000000,000000,000000];
+            SmaxH=[13400000,13400000,13400000,13400000,13400000,13400000,13400000,13400000];
+            SminE=[8,8,8,8,8,8,8,8,8];
+            SmaxE=[15,15,15,15,15,15,15,15];
+            G2minH=[6800000,6800000,6800000,6800000,6800000,6800000,6800000,6800000];
+            G2maxH=[13400000,13400000,13400000,13400000,13400000,13400000,13400000,13400000];
+            G2minE=[1,1,1,1,1,1,1,1]; G2maxE=[8,8,8,8,8,8,8,8,8];
+            xylim=[000000 13400000 1 15];
+elseif option==2
+            G1minH=[000000,000000,000000,000000,000000,000000,000000,000000,000000];
+            G1maxH=[2600000,2600000,2600000,2600000,2600000,2600000,2600000,2600000];
+            G1minE=[0,0,0,0,0,0,0,0]; G1maxE=[7,7,7,7,7,7,7,7,7];
+            SminH=[000000,000000,000000,000000,000000,000000,000000,000000,000000];
+            SmaxH=[5000000,5000000,5000000,5000000,5000000,5000000,5000000,5000000];
+            SminE=[7,7,7,7,7,7,7,7,7];
+            SmaxE=[13,13,13,13,13,13,13,13];
+            G2minH=[2600000,2600000,2600000,2600000,2600000,2600000,2600000,2600000];
+            G2maxH=[5000000,5000000,5000000,5000000,5000000,5000000,5000000,5000000];
+            G2minE=[0,0,0,0,0,0,0,0]; G2maxE=[7,7,7,7,7,7,7,7,7];
+            xylim=[000000 5000000 1 13];  
+elseif option==3
+            G1minH=[000000,000000,000000,000000,000000,000000,000000,000000,000000];
+            G1maxH=[6800000,6800000,6800000,6800000,6800000,6800000,6800000,6800000];
+            G1minE=[1,1,1,1,1,1,1,1]; G1maxE=[8,8,8,8,8,8,8,8,8];
+            SminH=[000000,000000,000000,000000,000000,000000,000000,000000,000000];
+            SmaxH=[13400000,13400000,13400000,13400000,13400000,13400000,13400000,13400000];
+            SminE=[8,8,8,8,8,8,8,8,8];
+            SmaxE=[15,15,15,15,15,15,15,15];
+            G2minH=[6800000,6800000,6800000,6800000,6800000,6800000,6800000,6800000];
+            G2maxH=[13400000,13400000,13400000,13400000,13400000,13400000,13400000,13400000];
+            G2minE=[1,1,1,1,1,1,1,1]; G2maxE=[8,8,8,8,8,8,8,8,8];
+            xylim=[000000 13400000 1 15];
+        elseif option==4
+            G1minH=[000000];
+            G1maxH=[6800000];
+            G1minE=[1]; G1maxE=[8];
+            SminH=[000000];
+            SmaxH=[13400000];
+            SminE=[8];
+            SmaxE=[15];
+            G2minH=[6800000];
+            G2maxH=[13400000];
+            G2minE=[1]; G2maxE=[8];
+            xylim=[000000 13400000 1 15];
 end
 
 switch DisplayOption
     case {'Panel'}
-        figure('Position',[100 100 250 900]);hold on;
+%         figure('Position',[100 100 250 900]);hold on;
     case 'Scatter'
-
+        
     case 'boxplot'
         figure('Position',[100 100 800 400]);hold on;
     case 'plot'
@@ -82,7 +95,6 @@ switch DisplayOption
         figure; hold on;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-label={'Control'};
 pmat=cell(uniquecondnum,1);
 for i=1:uniquecondnum
     Alldata=[];
@@ -96,7 +108,7 @@ for i=1:uniquecondnum
                 for site=sitemat
                     %shot=wellnum2str(row,col,site);
                     shot=[num2str(row),'_',num2str(col),'_',num2str(site)];
-
+                    
                     %[rowstring,colstring,sitestring]=wellnum2strRCS_3(row,col,site);
                     %shot=[rowstring,colstring,'_',sitestring];
                     if exist([datadir,'IF_',shot,'.mat'])
@@ -111,11 +123,12 @@ for i=1:uniquecondnum
         end
     end
     Hoechstval=Alldata(:,3).*Alldata(:,4);
-    %histogram(Hoechstval,100); vline([G1minH(i) G1maxH(i)]); vline([G2minH(i) G2maxH(i)]);
-
+    %histogram(Hoechstval,100); vline([G1minH(i) G2maxH(i)]);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if EdUMeasured==1
-        EdUval=Alldata(:,5);
+        %EdUval=log2(Alldata(:,3).*Alldata(:,6));
+        %%%%%%%%%%%%%%change%%%%%%%%%%%%%%%%%%%%%%%%
+        EdUval=Alldata(:,7);
         EdUval(EdUval<1)=1;
         EdUval=log2(EdUval);
         %%%%%% visualize Hoechst vs EdU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,10 +138,10 @@ for i=1:uniquecondnum
         %drawHoechstEdUgates(Hoechstval,EdUval,xylim,SminH,SmaxH,SminE,SmaxE);
         %drawHoechstEdUgates(Hoechstval,EdUval,xylim,G2minH,G2maxH,G2minE,G2maxE);
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        Allcells=Hoechstval>xylim(1) & Hoechstval<xylim(2) & EdUval>xylim(3) & EdUval<xylim(4);
         G1cells=Hoechstval>G1minH(i) & Hoechstval<G1maxH(i) & EdUval>G1minE(i) & EdUval<G1maxE(i);
         Scells=Hoechstval>SminH(i) & Hoechstval<SmaxH(i) & EdUval>SminE(i) & EdUval<SmaxE(i);
         G2cells=Hoechstval>G2minH(i) & Hoechstval<G2maxH(i) & EdUval>G2minE(i) & EdUval<G2maxE(i);
-        Allcells=Hoechstval>xylim(1) & Hoechstval<xylim(2) & EdUval>xylim(3) & EdUval<xylim(4);
     else
         %figure;histogram(Hoechstval); vline(G1minH(i),'r'); vline(G2maxH(i),'k');
         Allcells=Hoechstval>G1minH(1) & Hoechstval<G2maxH(1);
@@ -140,35 +153,54 @@ for i=1:uniquecondnum
     %Abvals=Alldata(:,9)./Alldata(:,8); %pRb/tRb
     %posval=Abvals>=0;
     %posvalx=Abvalsx>=0; %!!
-
+    
     switch DisplayOption %(median) 5; p53, 6; p21, 7; EdU
         case {'Panel','plot','boxplot','3D_hist'}
             %%single value
             if option2==1
                 Abvals=Alldata(:,protein)./Alldata(:,protein2);
-                posval=Abvals>=0;
+                posval=Abvals>=0 & Abvals<3; %filter minimum value and maximum value;
             elseif option2==2
-                Abvals=Alldata(:,protein);%./Alldata(:,protein2);
-                posval=Abvals>0; %Abvals(Abvals<1)=1; Abvals=log2(Abvals);
+                Abvals=Alldata(:,protein);%./Alldata(:,protein);
+                posval=Abvals>=0; Abvals(Abvals<1)=1; Abvals=log2(Abvals);
             elseif option2==3
-                Abvals=Alldata(:,protein);%
+                Abvals=Alldata(:,protein2);
                 posval=Abvals>=0;
+                elseif option2==4
+                Abvals=Alldata(:,protein2);
+                posval=Abvals>=0;
+                
+                p21=Alldata(:,protein);%./Alldata(:,protein);
+                posval=p21>=0; p21(p21<1)=1; p21=log2(p21);
+                
+                low_p21=p21<7.5;
+                middle_p21=p21>8 & p21<10;
+                high_p21=p21>11;
             end
-
+            %correct?
+%                         CDK2=Alldata(:,5)./Alldata(:,4);
+%                         CDK2gate=Alldata(:,4)>0;
+%             
+%                         CDK4=Alldata(:,7)./Alldata(:,6);
+%                         CDK4gate=Alldata(:,6)>0;
+%             
+%                         CDK4_corr=CDK4_activity_correction_allcells(CDK4,CDK2);
         case 'Scatter'
             if protein==21
                 Abvalsx=Alldata(:,3).*Alldata(:,4); %Hoechst
-                posvalx=Abvalsx>=0;
+                posvalx=Abvalsx>=0;       
+                Abvals=Alldata(:,protein2);%./Alldata(:,protein);
+                posval=Abvals>=0; Abvals(Abvals<1)=1; Abvals=log2(Abvals);
             elseif option2==1 & protein==11
                 Abvals=Alldata(:,protein2)./Alldata(:,protein);
                 posval=Abvals>=0;
-            elseif option2==2 && protein==11
+            elseif option2==2 & protein==11
                 Abvalsx=Alldata(:,6)./Alldata(:,5);
                 posvalx=Abvalsx>=0 & Alldata(:,5)>250;
             elseif option2==3 & protein==11
                 Abvals=Alldata(:,protein2)./Alldata(:,protein);
                 posval=Abvals>=0;
-
+                
                 Abvalsx=Alldata(:,6)./Alldata(:,5);
                 posvalx=Abvalsx>=0 & Alldata(:,5)>250;
             end
@@ -186,12 +218,25 @@ for i=1:uniquecondnum
     elseif cellS==4
         Cellstage=Allcells;
         CellPhase='all';
+    elseif cellS==5
+        Cellstage=G1cells | G2cells;
+        CellPhase='G1_G2';
     end
-
+    
     switch DisplayOption
         case {'Panel','plot','boxplot'}
-            gating=Cellstage & posval;% & CDK2gate & CDK4gate;
-            Abvals=Abvals(gating); %panel
+            if option2==4
+                gating_1=Cellstage & posval & low_p21;% & CDK2gate & CDK4gate;
+                gating_2=Cellstage & posval & middle_p21;
+                gating_3=Cellstage & posval & high_p21;
+                
+                cycD_1=Abvals(gating_1);
+                cycD_2=Abvals(gating_2);
+                cycD_3=Abvals(gating_3);
+            else
+                gating=Cellstage & posval;% & CDK2gate & CDK4gate;
+                Abvals=Abvals(gating); %panel
+            end
             %CDK2=CDK2(gating);
             %CDK4=CDK4(gating);
             %CDK4_corr=CDK4_corr(gating);
@@ -214,48 +259,72 @@ for i=1:uniquecondnum
     errV(i)=nanstd(plotMat{i});%Standard deviation    /sqrt(size(plotMat{1},1));
     %SEMV(i)=errV(i)/sqrt(72);
     cellNum(i)=size(plotMat{i},1);
-    %pmat{i}=Abvals;
-    Data{i}=Abvals;
-
+    pmat{i}=Abvals;
+    %Data=Abvals;
+    
     switch DisplayOption
         case 'Panel'
-            subaxis(uniquecondnum,1,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %vertical
-            bmin=0; bmax=30; ymax=0.1;
-            binNum=60;
-            [h]=histogram(Abvals,binNum,'Normalization','probability','BinLimits',[bmin,bmax]);
-            if protein==20
-                hypoRb(i)=sum(h.Values(h.BinEdges>=0 & h.BinEdges<=thresh));
-                hyperRb(i)=sum(h.Values(h.BinEdges>thresh & h.BinEdges<h.BinLimits(2)));
-                vline(thresh); title(['hypo=',num2str(round(hypoRb(i),2)),' hyper=',num2str(round(hyperRb(i),2)),' cellNum=',num2str(cellNum(i))],'FontSize',9);
-                Data(i)=hyperRb(i);
-                %Data{i}=Abvals;
+            %figure(99)
+            %subaxis(1,uniquecondnum,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %MB 0.15
+            %subaxis(uniquecondnum,1,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %vertical
+            
+            %%%%%%%%%%%%STOP BELOW AND TEST THIS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %histogram(Abvals,100);
+            
+            if option2==1
+               
+                    bmin=0; bmax=3; ymax=0.1;
+                    thresh=1.25;                
+
+            elseif option2==2
+                    bmin=6; bmax=12;  ymax=0.1; thresh=9.5;                
             end
+            binNum=60;
+            subplot(1,uniquecondnum,i);
+            [h]=histogram(Abvals,binNum,'Normalization','probability','BinLimits',[bmin,bmax]);
 
-            ylim([0 ymax]); xlim([bmin bmax]);
+            hypoRb(i)=sum(h.Values(h.BinEdges>=0 & h.BinEdges<=thresh));
+            hyperRb(i)=sum(h.Values(h.BinEdges>thresh & h.BinEdges<h.BinLimits(2)));
+            vline(thresh); title(['hypo=',num2str(round(hypoRb(i),2)),' hyper=',num2str(round(hyperRb(i),2))],'FontSize',12);
+% title(['hypo=',num2str(round(hypoRb(i),2)),' hyper=',num2str(round(hyperRb(i),2)),' cellNum=',num2str(cellNum(i))],'FontSize',9);
+            xlim([bmin bmax]);
+            ylim([0 ymax]);
 
+            xlim([bmin,bmax])
+            %%%%%%%%%%%%%%%%%%%%%%%%%change below%%%%%%%%%%%%%%%%%%%%%%%%%
+
+                if ismember(option,[11]);
+                    Data(i)=hyperRb(i);
+                else
+                    %Data(i)=nanmean(Abvals);
+                    Data(i)=hyperRb(i);
+                end
+
+            %             ylim([0 ymax]); xlim([bmin bmax]);
+            
             %gateRb=Abvals>thresh;
             %CDK4_pRbpos(i)=nanmean(CDK4_corr(gateRb));
             %CDK4_pRbneg(i)=nanmean(CDK4_corr(~gateRb));
-
+            
             %CDK2_pRbpos(i)=nanmean(CDK2(gateRb));
             %CDK2_pRbneg(i)=nanmean(CDK2(~gateRb));
-
+            
             %mean_Rbpos(i)=mean(Abvals(gateRb));
             %mean_pRbneg(i)=mean(Abvals(~gateRb));
             %disp('hi');
-
+            
             %             figure(100); hold on;
             %             subaxis(uniquecondnum,1,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %vertical
             %             histogram(CDK4_pRbpos,40,'Normalization','probability','BinLimits',[0,1]);
             %             histogram(CDK4_pRbneg,40,'Normalization','probability','BinLimits',[0,1]);
             %             xlim([0 1])
-
+            
             %             figure(101); hold on;
             %             subaxis(uniquecondnum,1,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %vertical
             %             histogram(CDK2_pRbpos,40,'Normalization','probability','BinLimits',[0.2,1.3]);
             %             histogram(CDK2_pRbneg,40,'Normalization','probability','BinLimits',[0.2,1.3]);
             %             xlim([0.2 1.3])
-
+            
             %%% draw 2N DNA content boundaries %%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %hold on;
             %line([G1maxH(i) G1maxH(i)],[0 10],'color','k','linewidth',2,'linestyle','--');
@@ -264,134 +333,93 @@ for i=1:uniquecondnum
                 y=ylabel(char(uniquenames(i)),'rot',0,'fontsize',fontsizevar);
                 set(y,'Units','Normalized','Position',[-0.2,0.4,0]);
             end
-
-            if option3==2
-
+            
+            if option==1000
+                Data=0;
                 CDK2=Alldata(:,6)./Alldata(:,5);
-                gatex=CDK2>=0 & Alldata(:,5)>0 & CDK2<3;
+                gatex=CDK2>=0 & Alldata(:,5)>250;
                 CDK4=Alldata(:,8)./Alldata(:,7);
-                gatey=CDK4>=0 & Alldata(:,7)>0 & CDK4<3;
-
-                CDK4_corr=CDK4_activity_correction_allcells(CDK4,CDK2);
-                %pRb=Alldata(:,10)./Alldata(:,11);
-                %gateRb=pRb>=0; %pRb(pRb<1)=1; pRb=log2(pRb);
+                gatey=CDK4>=0 & Alldata(:,7)>100;
+                
+                pRb=Alldata(:,10)./Alldata(:,11);
+                gateRb=pRb>=0; %pRb(pRb<1)=1; pRb=log2(pRb);
                 %thresh=9.8;
                 thresh=0.55;
-
-                gating=Cellstage & gatex & gatey;
-
-                CDK2=CDK2(gating); CDK4_corr=CDK4_corr(gating);
-                CDK2_data{i}=CDK2;
-                CDK4_data{i}=CDK4_corr;
-
-                %figure; subplot(1,2,1);
-                %histogram(CDK2);
-                %subplot(1,2,2);
-                %histogram(CDK4);
-
+                
+                gating=Cellstage & gatex & gatey & gateRb;
+                
+                CDK2=CDK2(gating); CDK4=CDK4(gating); pRb=pRb(gating);
+                CDK4_corr=CDK4_activity_correction_allcells(CDK4,CDK2);
+                
+                Rb_neg=pRb<thresh; Rb_pos=pRb>thresh;
+                
+                CDK2_Rbneg{i}=CDK2(Rb_neg); CDK2_Rbpos{i}=CDK2(Rb_pos);
+                CDK4_Rbneg{i}=CDK4_corr(Rb_neg); CDK4_Rbpos{i}=CDK4_corr(Rb_pos);
+                
+                figure; subplot(1,2,1);
+                if length(CDK2_Rbneg{i})>5
+                    %dscatter(CDK2_Rbneg{i},CDK4_Rbneg{i},'MSIZE',8); %colormap(parula_gradwhite) % 60
+                    scatter(CDK2_Rbneg{i},CDK4_Rbneg{i});
+                    axis([0 1.5 0 1]);
+                end
+                subplot(1,2,2);
                 %dscatter(CDK2_Rbpos{i},CDK4_Rbpos{i},'MSIZE',8); colormap(parula_gradwhite) % 60
-                %scatter(CDK2_Rbpos{i},CDK4_Rbpos{i});
+                scatter(CDK2_Rbpos{i},CDK4_Rbpos{i});
                 %figure; dscatter(CDK2,CDK4_corr);
-                %axis([0 1.8 0 1]);
+                axis([0 1.8 0 1]);
                 %xlabel(xname); ylabel('p-Rb (S807/811)');
             end
         case 'Scatter'
-            figure('Position',[100 100 800 400]);hold on;
-            if option==1
-                subaxis(1,uniquecondnum,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %MB 0.15
-                %subaxis(1,uniquecondnum,i,'ML',0.1,'MR',0.03,'MT',0.02,'MB',0.1,'SH',0.02); %MB 0.15
-                if protein==5
-                    xname='CDK4 activity';
-                elseif protein==7
-                    xname='CDK4 activity';
-                end
-
+            %figure('Position',[100 100 800 400]);hold on;
+            Data(i)=nanmean(Abvals);
+            
+            subaxis(1,uniquecondnum,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %MB 0.15
+            %subaxis(1,uniquecondnum,i,'ML',0.1,'MR',0.03,'MT',0.02,'MB',0.1,'SH',0.02); %MB 0.15
+            if protein==21
+                xname='DNS content';
+            elseif protein==7
+                xname='CDK4 activity';
                 xname='CDK2 activity';
-                binNum=30; xrange=[0.2 1.6]; xthresh=0.75;
-                yrange=[0 1.2]; ythresh=0.5;
-                subplot(3,2,1);
-                [h]=histogram(Abvalsx,binNum,'Normalization','probability','BinLimits',xrange); xlim(xrange); ymax=ceil(max(h.Values)*100)/100; ylim([0 ymax]);
-                high(i)=sum(h.Values(h.BinEdges>=0 & h.BinEdges<=xthresh));
-                low(i)=sum(h.Values(h.BinEdges>xthresh & h.BinEdges<h.BinLimits(2)));
-                vline(xthresh); title(['high=',num2str(round(high(i),2)),' low=',num2str(round(low(i),2)),' cellNum=',num2str(cellNum(i))],'FontSize',9);
-
-                subplot(3,2,2);
-                [h]=histogram(Abvals,binNum,'Normalization','probability','BinLimits',yrange); xlim(yrange); ymax=ceil(max(h.Values)*100)/100; ylim([0 ymax]);
-                high(i)=sum(h.Values(h.BinEdges>=0 & h.BinEdges<=ythresh));
-                low(i)=sum(h.Values(h.BinEdges>ythresh & h.BinEdges<h.BinLimits(2)));
-                vline(ythresh); title(['high=',num2str(round(high(i),2)),' low=',num2str(round(low(i),2)),' cellNum=',num2str(cellNum(i))],'FontSize',9);
-
-                subplot(3,2,[3:6]); hold on;
-                dscatter(Abvalsx,Abvals,'MSIZE',8); %colormap(parula_gradwhite) % 60
-                xlabel(xname); ylabel('p-Rb (S807/811)');
-                %scatterhist(Abvalsx,Abvals); % 60
-                %             if i==1
-                %                 ylim([4 12]);
-                axis([xrange yrange])
-
-                %             end
-
-                %%% annotate correlation between two data%%%%%%%%%%%%%%%%%%%%%%
-                %             textpos=[0.1+((i-1)*0.3) 0.9 0.1 0.1];
-                %             annotation('textbox',textpos,'String',['R=',num2str(Rval{i}),'  p=',num2str(Pval{i})]);
-                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                title(char(uniquenames(i)));
-            elseif option==3
-                subaxis(1,uniquecondnum,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %MB 0.15
-                %subaxis(1,uniquecondnum,i,'ML',0.1,'MR',0.03,'MT',0.02,'MB',0.1,'SH',0.02); %MB 0.15
-                if protein==5
-
-                elseif protein==7
-                    xname='CDK4 activity';
-                end
-
-                xname='CDK2 activity';
-                binNum=30; xrange=[0.2 1.6]; xthresh=0.75;
-
-                yrange=[0 0.5]; ythresh=0.25;
-                subplot(3,2,1);
-                [h]=histogram(Abvalsx,binNum,'Normalization','probability','BinLimits',xrange); xlim(xrange); ymax=ceil(max(h.Values)*100)/100; ylim([0 ymax]);
-                high(i)=sum(h.Values(h.BinEdges>=0 & h.BinEdges<=xthresh));
-                low(i)=sum(h.Values(h.BinEdges>xthresh & h.BinEdges<h.BinLimits(2)));
-                vline(xthresh); title(['high=',num2str(round(high(i),2)),' low=',num2str(round(low(i),2)),' cellNum=',num2str(cellNum(i))],'FontSize',9);
-
-                subplot(3,2,2);
-                [h]=histogram(Abvals,binNum,'Normalization','probability','BinLimits',yrange); xlim(yrange); ymax=ceil(max(h.Values)*100)/100; ylim([0 ymax]);
-                high(i)=sum(h.Values(h.BinEdges>=0 & h.BinEdges<=ythresh));
-                low(i)=sum(h.Values(h.BinEdges>ythresh & h.BinEdges<h.BinLimits(2)));
-                vline(ythresh); title(['high=',num2str(round(high(i),2)),' low=',num2str(round(low(i),2)),' cellNum=',num2str(cellNum(i))],'FontSize',9);
-
-                subplot(3,2,[3:6]); hold on;
-                dscatter(Abvalsx,Abvals,'MSIZE',8); %colormap(parula_gradwhite) % 60
-                xlabel(xname); ylabel('p-Rb (S807/811)');
-                %scatterhist(Abvalsx,Abvals); % 60
-                %             if i==1
-                %                 ylim([4 12]);
-                axis([xrange yrange])
-
-                %             end
-
-                %%% annotate correlation between two data%%%%%%%%%%%%%%%%%%%%%%
-                %             textpos=[0.1+((i-1)*0.3) 0.9 0.1 0.1];
-                %             annotation('textbox',textpos,'String',['R=',num2str(Rval{i}),'  p=',num2str(Pval{i})]);
-                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                title(char(uniquenames(i)));
             end
-
+            
+            
+            binNum=30; xrange=[0.2 1.6]; xthresh=0.75;
+            
+            %yrange=[0 1.2]; ythresh=0.5;
+            %subplot(3,2,1);
+            %[h]=histogram(Abvalsx,binNum,'Normalization','probability','BinLimits',xrange); xlim(xrange); ymax=ceil(max(h.Values)*100)/100; ylim([0 ymax]);
+            %high(i)=sum(h.Values(h.BinEdges>=0 & h.BinEdges<=xthresh));
+            %low(i)=sum(h.Values(h.BinEdges>xthresh & h.BinEdges<h.BinLimits(2)));
+            %vline(xthresh); title(['high=',num2str(round(high(i),2)),' low=',num2str(round(low(i),2)),' cellNum=',num2str(cellNum(i))],'FontSize',9);
+            
+            %subplot(3,2,2);
+            %[h]=histogram(Abvals,binNum,'Normalization','probability','BinLimits',yrange); xlim(yrange); ymax=ceil(max(h.Values)*100)/100; ylim([0 ymax]);
+            %high(i)=sum(h.Values(h.BinEdges>=0 & h.BinEdges<=ythresh));
+            %low(i)=sum(h.Values(h.BinEdges>ythresh & h.BinEdges<h.BinLimits(2)));
+            %vline(ythresh); title(['high=',num2str(round(high(i),2)),' low=',num2str(round(low(i),2)),' cellNum=',num2str(cellNum(i))],'FontSize',9);
+            
+            %subplot(3,2,[3:6]); hold on;
+            dscatter(Abvalsx,Abvals,'MSIZE',8); %colormap(parula_gradwhite) % 60
+            xlabel(xname); ylabel('cyclin D1');
+            ylim([4 15])
+            %%% annotate correlation between two data%%%%%%%%%%%%%%%%%%%%%%
+            %             textpos=[0.1+((i-1)*0.3) 0.9 0.1 0.1];
+            %             annotation('textbox',textpos,'String',['R=',num2str(Rval{i}),'  p=',num2str(Pval{i})]);
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            title(char(uniquenames(i)));
+            
+            
         case 'boxplot'
             subaxis(1,uniquecondnum,i,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02); %MB 0.15
             boxplot(Abvals,'notch','on','symbol','o');
-
-            Data{i}=Abvals;
-            ylim([-5 230]);
             %hyperRb=pRb>11;
             %hypoRb=pRb>2 & pRb<8;
             %subaxis(1,2,1,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02);
-            %boxplot(Abvals,'notch','on','symbol','o'); ylim([0 100]);
+            %boxplot(Abvals(hypoRb),'notch','on','symbol','o'); ylim([0 100]);
             %subaxis(1,2,2,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02);
             %boxplot(Abvals(hyperRb),'notch','on','symbol','o'); ylim([0 100]);
             %             set(gca,'XTickLabel',{char(uniquenames(i))});
-
+            
             %             binNum=50;
             %             subaxis(1,2,1,'ML',0.1,'MR',0.03,'MT',0.1,'MB',0.15,'SH',0.02);
             %             histogram(Abvals(hypoRb),binNum,'Normalization','probability');
@@ -421,17 +449,17 @@ switch DisplayOption
         end
         num_bins=50; offset_increment=0.1; color1=[1 0 0]; color2=[0 0 1]; xlims=[]; mthd='histogram';
         histogram_3D_v3(plotMat,bmin,bmax,num_bins,offset_increment,color1,color2,xlims,mthd)
-
+        
     case 'Panel'
-        if option==3
-            %save([resultdir CellPhase '_pRb_tRb.mat'],'plotMat','uniquenames')
-            %             xlabel('p21 log2(medianRFU)');
-            %             hxl=get(gca,'xlabel');
-            %             set(hxl,'fontsize',fontsizevar);
-            %             set(gcf,'color','w','PaperPosition',[0 0 pphvar 4]);
-            %             export_fig([resultdir 'CyclinD1_' CellPhase '_.eps'],'-eps','-transparent','-nocrop');
-            %             export_fig([resultdir 'CyclinD1_' CellPhase '_.png']);
-        end
+        %        if option==3
+        %save([resultdir CellPhase '_pRb_tRb.mat'],'plotMat','uniquenames')
+        %             xlabel('p21 log2(medianRFU)');
+        %             hxl=get(gca,'xlabel');
+        %             set(hxl,'fontsize',fontsizevar);
+        %             set(gcf,'color','w','PaperPosition',[0 0 pphvar 4]);
+        %             export_fig([resultdir 'CyclinD1_' CellPhase '_.eps'],'-eps','-transparent','-nocrop');
+        %             export_fig([resultdir 'CyclinD1_' CellPhase '_.png']);
+        %        end
     case 'Scatter'
         set(gcf,'color','w','PaperPosition',[0 0 15 3]);
         %         save([resultdir 'G2_Corr#6-CyclinD.mat'],'Rval','Pval');
@@ -460,7 +488,7 @@ switch DisplayOption
         %                 export_fig([resultdir '53BP1foci-p53_' CellPhase '_Correlation.eps'],'-eps','-transparent','-nocrop');
         %             end
         %         end
-
+        
         % xlabel('Hoechst'); ylabel('p21');
         % export_fig([resultdir 'HoechstVSp21.eps'],'-eps','-transparent','-nocrop');
     case 'plot'
@@ -469,12 +497,12 @@ switch DisplayOption
         %         errorbar(timeVals,plotV,SEMV,'Color',colors{1});%errV
         plot(timeVals,plotV);
         ylabel('p21 mRNA'); %ylim([0 1.1]);
-
+        
         xlabel('inhibtion');
         hxl=get(gca,'ylabel');
         set(hxl,'fontsize',fontsizevar);
         set(gcf,'color','w','PaperPosition',[0 0 pphvar 4]);
-
+        
         if option==1
             if protein==8
                 save([resultdir CellPhase '_53BP1_area.mat'],'plotMat','uniquenames')
@@ -509,7 +537,7 @@ switch DisplayOption
             end
         end
     case 'boxplot'
-
+        
 end
 %textpos=[0.15 0.55 0.3 0.15];
 %annotation('textbox',textpos,'String',['p-value = ',num2str(p)]);
